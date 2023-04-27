@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.Entete {
+    background-color: beige;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 5px;
+}
+
+.Category {
+    background-color: gray;
+}
+
+.Details {
+    background-color:#F5F5F5;
+}
