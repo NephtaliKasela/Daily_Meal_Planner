@@ -1,4 +1,5 @@
 ﻿using Daily_Meal_Planner.Models;
+using DataLayer;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,6 +16,7 @@ namespace Daily_Meal_Planner.Controllers
 
         public IActionResult Index()
         {
+            ProductsFileRepository pr = new ProductsFileRepository();
             return View();
         }
 

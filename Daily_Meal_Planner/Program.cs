@@ -1,6 +1,8 @@
 using Daily_Meal_Planner.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using DataLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,19 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+// Add services to the container.
+builder.Services.AddDbContext<MyDBContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<GzipCompressionProvider>();
+});
+// end
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
