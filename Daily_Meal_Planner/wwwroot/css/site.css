@@ -18,16 +18,35 @@ body {
 }
 
 .Entete {
-    background-color: beige;
+    background-color: darkgoldenrod;
     padding-top: 50px;
     padding-bottom: 50px;
     margin-bottom: 5px;
 }
 
-.Category {
-    background-color: gray;
+.Category-section {
+    background-color: #F5F5F5;
+    border: solid orange;
+    border-left: 1px;
+    border-top: 1px;
+    border-bottom: 1px;
 }
 
-.Details {
+/*.Category {
+    background-color: gray;
+}*/
+
+/*.subCategory {
+    background-color: gray;
+    padding-right: 20px;
+    padding-left: 20px;
+}*/
+/*.Details {
     background-color:#F5F5F5;
+}*/
+.formation-block {
+    background-color: #F5F5F5;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 2px;
 }

@@ -1,4 +1,5 @@
-﻿using Daily_Meal_Planner.Models;
+﻿using BusinessLayer;
+using Daily_Meal_Planner.Models;
 using DataLayer;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -14,10 +15,25 @@ namespace Daily_Meal_Planner.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string catName)
         {
-            ProductsFileRepository pr = new ProductsFileRepository();
-            return View();
+            ProductsFileRepository prod = new ProductsFileRepository();
+            List<Product> products = new List<Product>();
+            products = prod.GetAllProducts();
+
+            var vm = new AllProductsViewModel();
+            vm.Categories = prod.GetCategoryProducts(products);
+
+            // get all names of category products
+            vm.CategoryList = new List<string>();
+            foreach(var categoryName in vm.Categories)
+            {
+                vm.CategoryList.Add(categoryName.Name);
+            }
+
+            vm.CatName = catName;
+
+            return View(vm);
         }
 
         public IActionResult Privacy()

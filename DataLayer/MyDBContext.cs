@@ -2,7 +2,7 @@
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using BisinessLayer;
+using BusinessLayer;
 
 namespace DataLayer
 {
@@ -17,14 +17,17 @@ namespace DataLayer
         //public DbSet<User> Users { get; set; }
 
         //get data
-        //FormationMemoryRepository repository = new FormationMemoryRepository();
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Formation>()
-        //    .Property(f => f.Descriotion)
-        //        .HasMaxLength(500);
+        ProductsFileRepository repository = new ProductsFileRepository();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Formation>()
+            //.Property(f => f.Descriotion)
+            //    .HasMaxLength(500);
 
-        //    modelBuilder.Entity<Formation>().HasData(repository.GetAllFormations());
-        //}
+            modelBuilder.Entity<Category>().HasData(
+                new Product { Id = 1, Name = "Бренди 40% алкоголя", Gramms = 100, Protein = 0.00, Fats = 0.00, Carbs = 0.50, Calories = 225, CategoryName = "Алкоголь" }
+                
+                );
+        }
     }
 }

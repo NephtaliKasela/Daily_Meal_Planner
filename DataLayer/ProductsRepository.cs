@@ -1,4 +1,4 @@
-﻿using BisinessLayer;
+﻿using BusinessLayer;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,12 @@ namespace DataLayer
     public class ProductsRepository: IProductsRepository
     {
         MyDBContext _context;
-
         public ProductsRepository(MyDBContext context)
         {
             _context= context;
         }
 
-        public List<Product> GetAllFormations()
+        public List<Product> GetAllProducts()
         {
             return _context.Products.ToList();
         }

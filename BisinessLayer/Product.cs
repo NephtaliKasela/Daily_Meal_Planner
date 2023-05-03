@@ -1,4 +1,4 @@
-﻿namespace BisinessLayer
+﻿namespace BusinessLayer
 {
     public class Product
     {
