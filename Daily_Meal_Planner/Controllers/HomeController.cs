@@ -36,10 +36,12 @@ namespace Daily_Meal_Planner.Controllers
             return View(vm);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Mealtime()
         {
             return View();
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

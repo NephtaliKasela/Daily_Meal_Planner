@@ -36,11 +36,9 @@ body {
     background-color: gray;
 }*/
 
-/*.subCategory {
-    background-color: gray;
-    padding-right: 20px;
-    padding-left: 20px;
-}*/
+.subCategory {
+    color: tomato;
+}
 /*.Details {
     background-color:#F5F5F5;
 }*/
@@ -49,4 +47,22 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     margin: 2px;
+}
+
+.orange {
+    color: orange;
+}
+
+.container01 {
+    background-color: #F5F5F5;
+
+  /*  padding-left: 500px;
+    padding-right: 20px;*/
+}
+
+.subContainer {
+    margin-left: 0px;
+    margin-right: 0px;
+    border: solid orange;
+    padding: 20px;
 }

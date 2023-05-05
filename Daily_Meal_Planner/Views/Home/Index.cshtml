@@ -15,11 +15,6 @@
     <div class="spinner-grow text-primary"></div>
     <div class="spinner-grow text-success"></div>
     <div class="spinner-grow text-info"></div>
-    <div class="spinner-grow text-warning"></div>
-    <div class="spinner-grow text-danger"></div>
-    <div class="spinner-grow text-secondary"></div>
-    <div class="spinner-grow text-dark"></div>
-    <div class="spinner-grow text-light"></div>
 </div>
 
 <div class="row">
@@ -27,12 +22,19 @@
         <div class="Category"><h6>Category</h6></div>
         <hr />
         <div class="row">
-            @foreach(string name in Model.CategoryList)
-            {
-                <div>
-                    <a asp-controller="Home" asp-action="index" asp-route-catName="@name"><h7 class="subCategory">@name</h7></a>
-                </div>
-            }
+            <ul>
+                @foreach (string name in Model.CategoryList)
+                {
+                    @*<div>
+                        <a asp-controller="Home" asp-action="index" asp-route-catName="@name"><h7 class="subCategory">@name</h7></a>
+                    </div>*@
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark subCategory" asp-action="index" asp-route-catName="@name"><h7 class="subCategory">@name</h7></a>
+                    </li>
+                }
+            </ul>
+            
         </div>
     </div>
     <div class="Details col-10">
@@ -41,12 +43,19 @@
         <div class="row text-center justify-content-center">
             @foreach(var c in Model.Categories)
             {
-                if(c.Name == Model.CatName)
+                @if(c.Name == Model.CatName)
                 {
-                    foreach(var p in c.Products)
+                    @foreach(var p in c.Products)
                     {
                         <div class="formation-block col-sm-6 col-md-3 col-lg-3">
-                            <h6>@p.Name</h6>
+                            @if (p.CategoryName == "Алкоголь")
+                            {
+                                <h6><span class="fa-solid fa-wine-bottle fa-shake fa-2x orange"></span> @p.Name</h6>
+                            }
+                            else
+                            {
+                                <h6>@p.Name</h6>
+                            }
                             <hr />
                             <p>Gramms: @p.Gramms g</p>
                             <p>Protein: @p.Protein</p>
@@ -55,16 +64,51 @@
                             <p>Calories: @p.Calories</p>
 
                             <hr />
-                            <form asp-controller="Home" asp-action="index" asp-route-catName="">
-                                <input type="submit" value="Add" class="btn-sm btn-outline-success" />
+                            <form asp-controller="Home" asp-action="Mealtime">
+                                <button type="submit" class="btn btn-info mt-3">Add</button>
                                 <input type="hidden" name="idFormation" value="@p.CategoryName" />
                                 <input type="hidden" name="idFormation" value="@p.Name" />
                             </form>
+                            
+                            @*<button type="submit" class="btn btn-info mt-3" data-bs-toggle="offcanvas" data-bs-target="#demo">Add</button>*@
+
                         </div>
                     }
-                    
                 }         
             }
         </div>
     </div>
 </div>
+
+<br />
+<hr />
+
+<div class="offcanvas offcanvas-start" id="demo">
+    <div class="offcanvas-header">
+        <h3 class="offcanvas-title">Meal times</h3>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form asp-controller="Home" asp-action="index" asp-route-catName="">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check1" name="Breakfast" value="something">
+                <label class="form-check-label" for="check2">Breakfast</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check2" name="Lunch" value="something">
+                <label class="form-check-label" for="check2">Lunch</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check3" name="Dinner" value="something">
+                <label class="form-check-label" for="check2">Dinner</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Button to open the offcanvas sidebar -->
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+    Open Offcanvas Sidebar
+</button>
