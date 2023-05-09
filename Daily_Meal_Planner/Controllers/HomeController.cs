@@ -2,6 +2,7 @@
 using Daily_Meal_Planner.Models;
 using DataLayer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
 
 namespace Daily_Meal_Planner.Controllers
@@ -9,20 +10,21 @@ namespace Daily_Meal_Planner.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public IProductsRepository _productRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductsRepository productRepository)
         {
             _logger = logger;
+            _productRepository = productRepository;
         }
 
         public IActionResult Index(string catName)
         {
-            ProductsFileRepository prod = new ProductsFileRepository();
             List<Product> products = new List<Product>();
-            products = prod.GetAllProducts();
+            products = _productRepository.GetAllProducts();
 
             var vm = new AllProductsViewModel();
-            vm.Categories = prod.GetCategoryProducts(products);
+            vm.Categories = _productRepository.GetCategoryProducts(products);
 
             // get all names of category products
             vm.CategoryList = new List<string>();
@@ -35,12 +37,6 @@ namespace Daily_Meal_Planner.Controllers
 
             return View(vm);
         }
-
-        public IActionResult Mealtime()
-        {
-            return View();
-        }
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

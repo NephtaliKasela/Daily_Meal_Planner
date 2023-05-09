@@ -5,27 +5,31 @@
 namespace DataLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class ProductsMigration : Migration
+    public partial class UserProductMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "UserProducts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gramms = table.Column<double>(type: "float", nullable: false),
                     Protein = table.Column<double>(type: "float", nullable: false),
                     Fats = table.Column<double>(type: "float", nullable: false),
                     Carbs = table.Column<double>(type: "float", nullable: false),
-                    Calories = table.Column<double>(type: "float", nullable: false)
+                    Calories = table.Column<double>(type: "float", nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mealtime = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_UserProducts", x => x.Id);
                 });
         }
 
@@ -33,7 +37,7 @@ namespace DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "UserProducts");
         }
     }
 }

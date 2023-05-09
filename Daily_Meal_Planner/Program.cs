@@ -17,6 +17,7 @@ builder.Services.AddDbContext<MyDBContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 builder.Services.AddResponseCompression(options =>
 {

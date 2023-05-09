@@ -20,19 +20,45 @@ namespace DataLayer
         {
             return _context.Products.ToList();
         }
-        public void ReadData(string path)
-        {
 
+        public List<Category> GetCategoryProducts(List<Product> Products)
+        {
+            List<Category> categories = new List<Category>();
+            int count = 1;
+
+            // classify products by category
+            foreach (Product p in Products)
+            {
+                bool flag = false;
+                // check if category name already exist in the list
+                foreach (var c in categories)
+                {
+                    if (p.CategoryName == c.Name)
+                    {
+                        c.Products.Add(p);
+                        flag = true;
+                        break;
+                    }
+                }
+                // otherwise create an other category 
+                if (flag == false)
+                {
+                    Category cat = new Category();
+                    cat.Id = count;
+                    cat.Name = p.CategoryName;
+
+                    cat.Products = new List<Product>();
+                    cat.Products.Add(p);
+
+                    count++;
+                    categories.Add(cat);
+                }
+            }
+            return categories;
         }
 
-        //public List<Formation> GetFormations(int number)
-        //{
-        //    return _context.Formations.Include("Avis").OrderBy(qu => Guid.NewGuid()).Take(number).ToList();
-        //}
-
-        //public Formation GetFormationById(int iIdFormation)
-        //{
-        //    return _context.Formations.Include("Avis").FirstOrDefault(f => f.Id == iIdFormation);
-        //}
+        public void ReadData(string path)
+        {
+        }
     }
 }

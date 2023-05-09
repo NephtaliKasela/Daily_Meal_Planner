@@ -13,12 +13,6 @@ namespace DataLayer
 {
     public class ProductsFileRepository : IProductsRepository
     {
-        
-        
-        public ProductsFileRepository()
-        {
-        }
-
         public List<Product> GetAllProducts()
         {
             List<Product> Products = new List<Product>();
@@ -29,7 +23,7 @@ namespace DataLayer
             Products.Add(new Product { Id = 4, Name = "Беляши", Gramms = 100, Protein = 11.00, Fats = 10.00, Carbs = 23.20, Calories = 223, CategoryName = "Готовые блюда" });
             Products.Add(new Product { Id = 5, Name = "Блинчики с творогом и сметаной", Gramms = 100, Protein = 25.80, Fats = 33.10, Carbs = 55.20, Calories = 640, CategoryName = "Готовые блюда" });
             Products.Add(new Product { Id = 6, Name = "Белые грибы", Gramms = 100, Protein = 3.70, Fats = 1.70, Carbs = 1.10, Calories = 23, CategoryName = "Грибы" });
-            Products.Add(new Product { Id = 1, Name = "Белые грибы сушеные", Gramms = 100, Protein = 20.10, Fats = 4.80, Carbs = 7.60, Calories = 152, CategoryName = "Грибы" });
+            Products.Add(new Product { Id = 7, Name = "Белые грибы сушеные", Gramms = 100, Protein = 20.10, Fats = 4.80, Carbs = 7.60, Calories = 152, CategoryName = "Грибы" });
 
             return Products;
         }

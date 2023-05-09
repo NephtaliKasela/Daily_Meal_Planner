@@ -4,11 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
-
 <div class="Entete text-center">
     <div><h3>Dealy meal planner</h3></div>
     <div class="spinner-grow text-muted"></div>
@@ -25,10 +20,6 @@
             <ul>
                 @foreach (string name in Model.CategoryList)
                 {
-                    @*<div>
-                        <a asp-controller="Home" asp-action="index" asp-route-catName="@name"><h7 class="subCategory">@name</h7></a>
-                    </div>*@
-
                     <li class="nav-item">
                         <a class="nav-link text-dark subCategory" asp-action="index" asp-route-catName="@name"><h7 class="subCategory">@name</h7></a>
                     </li>
@@ -64,10 +55,16 @@
                             <p>Calories: @p.Calories</p>
 
                             <hr />
-                            <form asp-controller="Home" asp-action="Mealtime">
+                            <form asp-controller="Mealtime" asp-action="index">
                                 <button type="submit" class="btn btn-info mt-3">Add</button>
-                                <input type="hidden" name="idFormation" value="@p.CategoryName" />
-                                <input type="hidden" name="idFormation" value="@p.Name" />
+                                <input type="hidden" name="ProductName" value="@p.Name" />
+                                <input type="hidden" name="Gramms" value="@p.Gramms" />
+                                <input type="hidden" name="Protein" value="@p.Protein" />
+                                <input type="hidden" name="Fats" value="@p.Fats" />
+                                <input type="hidden" name="Carbs" value="@p.Carbs" />
+                                <input type="hidden" name="Calories" value="@p.Calories" />
+                                <input type="hidden" name="CategoryName" value="@p.CategoryName" />
+                                
                             </form>
                             
                             @*<button type="submit" class="btn btn-info mt-3" data-bs-toggle="offcanvas" data-bs-target="#demo">Add</button>*@
@@ -89,22 +86,27 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
-        <form asp-controller="Home" asp-action="index" asp-route-catName="">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="check1" name="Breakfast" value="something">
-                <label class="form-check-label" for="check2">Breakfast</label>
+        <div class="row justify-content-center container01">
+            <div class="subContainer col-sm-4 col-md-4 col-lg-6">
+                <div>
+                    <h5>Mealtimes</h5>
+                    <hr />
+                </div>
+                <form asp-controller="Home" asp-action="index">
+                    <div>
+                        <label>Selectionner une note :</label>
+                        <select name="note" class="form-control">
+                            <option>Breakfast</option>
+                            <option>Lunch</option>
+                            <option>Dinner</option>
+                        </select>
+                    </div>
+
+                    <hr />
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="check2" name="Lunch" value="something">
-                <label class="form-check-label" for="check2">Lunch</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="check3" name="Dinner" value="something">
-                <label class="form-check-label" for="check2">Dinner</label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </form>
+        </div>
     </div>
 </div>
 

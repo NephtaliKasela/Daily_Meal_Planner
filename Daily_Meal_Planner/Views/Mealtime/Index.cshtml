@@ -1,0 +1,38 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<br />
+
+<div class="row justify-content-center container01">
+    <div class="subContainer col-sm-4 col-md-4 col-lg-6">
+        <div>
+            <h5>Mealtimes</h5>
+            <hr />
+        </div>
+        <form asp-controller="Mealtime" asp-action="SaveUserProduct">
+            <div>
+                <label>Select mealtime :</label>
+                <select name="MealtimeChoice" class="form-control">
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                </select>
+            </div>
+
+            <hr />
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            <input type="hidden" name="ProductName" value="@Model.ProductName" />
+            <input type="hidden" name="Gramms" value="@Model.Gramms" />
+            <input type="hidden" name="Protein" value="@Model.Protein" />
+            <input type="hidden" name="Fats" value="@Model.Fats" />
+            <input type="hidden" name="Calories" value="@Model.Calories" />
+            <input type="hidden" name="CategoryName" value="@Model.CategoryName" />
+        </form>
+    </div>
+</div>
+

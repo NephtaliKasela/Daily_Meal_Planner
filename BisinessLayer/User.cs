@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<MealTime> MealTimes { get; set; }
-
+        public string Password { get; set; }
+        public List<UserMealtime> Mealtimes { get; set; }
     }
 }

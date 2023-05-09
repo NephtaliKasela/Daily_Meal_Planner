@@ -1,12 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BusinessLayer
+﻿namespace Daily_Meal_Planner.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string ProductName { get; set; }
         public double Gramms { get; set; }
         public double Protein { get; set; }
         public double Fats { get; set; }
