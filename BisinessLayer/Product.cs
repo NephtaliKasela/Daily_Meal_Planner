@@ -13,5 +13,6 @@ namespace BusinessLayer
         public double Carbs { get; set; }
         public double Calories { get; set; }
         public string CategoryName { get; set; }
+        public bool State { get; set; }
     }
 }

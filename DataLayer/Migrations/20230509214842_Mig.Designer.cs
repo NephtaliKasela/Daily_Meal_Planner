@@ -4,6 +4,7 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230509214842_Mig")]
+    partial class Mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +56,6 @@ namespace DataLayer.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
-                    b.Property<bool>("State")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -70,8 +70,7 @@ namespace DataLayer.Migrations
                             Fats = 0.0,
                             Gramms = 100.0,
                             Name = "Бренди 40% алкоголя",
-                            Protein = 0.0,
-                            State = false
+                            Protein = 0.0
                         },
                         new
                         {
@@ -82,8 +81,7 @@ namespace DataLayer.Migrations
                             Fats = 0.0,
                             Gramms = 100.0,
                             Name = "Вермут 13% алкоголя",
-                            Protein = 0.0,
-                            State = false
+                            Protein = 0.0
                         },
                         new
                         {
@@ -94,8 +92,7 @@ namespace DataLayer.Migrations
                             Fats = 0.0,
                             Gramms = 100.0,
                             Name = "Вино белое 10% алкоголя",
-                            Protein = 0.0,
-                            State = false
+                            Protein = 0.0
                         },
                         new
                         {
@@ -106,8 +103,7 @@ namespace DataLayer.Migrations
                             Fats = 10.0,
                             Gramms = 100.0,
                             Name = "Беляши",
-                            Protein = 11.0,
-                            State = false
+                            Protein = 11.0
                         },
                         new
                         {
@@ -118,8 +114,7 @@ namespace DataLayer.Migrations
                             Fats = 33.100000000000001,
                             Gramms = 100.0,
                             Name = "Блинчики с творогом и сметаной",
-                            Protein = 25.800000000000001,
-                            State = false
+                            Protein = 25.800000000000001
                         },
                         new
                         {
@@ -130,8 +125,7 @@ namespace DataLayer.Migrations
                             Fats = 1.7,
                             Gramms = 100.0,
                             Name = "Белые грибы",
-                            Protein = 3.7000000000000002,
-                            State = false
+                            Protein = 3.7000000000000002
                         },
                         new
                         {
@@ -142,8 +136,7 @@ namespace DataLayer.Migrations
                             Fats = 4.7999999999999998,
                             Gramms = 100.0,
                             Name = "Белые грибы сушеные",
-                            Protein = 20.100000000000001,
-                            State = false
+                            Protein = 20.100000000000001
                         });
                 });
 
@@ -250,9 +243,6 @@ namespace DataLayer.Migrations
 
                     b.Property<double>("Protein")
                         .HasColumnType("float");
-
-                    b.Property<bool>("State")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("UserCategoryId")
                         .HasColumnType("int");

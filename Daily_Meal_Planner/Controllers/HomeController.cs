@@ -27,7 +27,6 @@ namespace Daily_Meal_Planner.Controllers
             vm.Categories = _productRepository.GetCategoryProducts(products);
 
             // get all names of category products
-            vm.CategoryList = new List<string>();
             foreach(var categoryName in vm.Categories)
             {
                 vm.CategoryList.Add(categoryName.Name);

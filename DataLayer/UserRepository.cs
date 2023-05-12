@@ -25,7 +25,7 @@ namespace DataLayer
 
         public List<UserProduct> GetAllUserProducts()
         {
-            return _context.UserProducts.ToList();
+            return _context.UserProducts.Where(p => p.State == false).ToList();
         }
 
         public List<UserProduct> GetUserProductsByName(string username)
@@ -70,6 +70,41 @@ namespace DataLayer
             return categories;
         }
 
+        public List<UserMealtime> GetMealtimes(List<UserCategory> categories)
+        {
+            List<UserMealtime> mealtimes = new List<UserMealtime>();
+            int count = 1;
+
+            // classify products by category
+            foreach (UserCategory c in categories)
+            {
+                bool flag = false;
+                // check if mealtime name already exist in the list
+                foreach (UserMealtime m in mealtimes)
+                {
+                    if (c.Mealtime == m.MealtimeName)
+                    {
+                        m.Categories.Add(c);
+                        flag = true;
+                        break;
+                    }
+                }
+                // otherwise create an other mealtime 
+                if (flag == false)
+                {
+                    UserMealtime mealT = new UserMealtime();
+                    mealT.Id = count;
+                    mealT.MealtimeName = c.Mealtime;
+
+                    mealT.Categories = new List<UserCategory>();
+                    mealT.Categories.Add(c);
+
+                    count++;
+                    mealtimes.Add(mealT);
+                }
+            }
+            return mealtimes;
+        }
 
         public void SaveUserProduct(List<UserProduct> products, string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName)
         {
@@ -90,28 +125,22 @@ namespace DataLayer
             _context.SaveChanges();
         }
 
+        public void EditAndSaveUserProduct(string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName)
+        {
+            UserProduct prod = new UserProduct();
+            foreach(UserProduct up in _context.UserProducts)
+            {
+                if(up.Mealtime == mealtimeChoice && up.CategoryName == CategoryName && up.ProductName == productName)
+                {
+                    up.Protein = Protein;
+                    up.Fats= Fats;
+                    up.Carbs= Carbs;
+                    up.Calories= Calories;
 
-        
-        //public List<UserMealtime> GetMealtimes(List<UserCategory> categories)
-        //{
-        //    List<UserMealtime> mealtimes = new List<UserMealtime>();
-        //    int count = 1;
-
-        //    // classify products by category
-        //    foreach (UserMealtime c in categories)
-        //    {
-        //        bool flag = false;
-        //        // check if category name already exist in the list
-        //        foreach (UserCategory m in mealtimes)
-        //        {
-        //            if (c.Mealtime == m.Name)
-        //            {
-        //                uc.Products.Add(p);
-        //                flag = true;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
+                    break;
+                }
+            }
+            _context.SaveChanges();
+        }
     }
 }

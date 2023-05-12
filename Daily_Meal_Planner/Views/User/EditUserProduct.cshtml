@@ -1,0 +1,42 @@
+﻿@model ProductAndMealtimeViewModel
+
+@{
+    ViewData["Title"] = "EditUserProduct";
+}
+
+<h1>EditUserProduct</h1>
+
+<br />
+
+<div class="row justify-content-center container01">
+    <div class="subContainer col-sm-4 col-md-4 col-lg-6">
+        <div>
+            <h5>@Model.ProductName</h5>
+            <hr />
+        </div>
+        <form asp-controller="User" asp-action="EditAndSaveUserProduct">
+            <div>
+                <label>Gramms:</label>
+                <input type="text" name="Gramms" value="@Model.Gramms" class="form-control" />
+                <label>Protein:</label>
+                <input type="text" name="Protein" value="@Model.Protein" class="form-control" />
+                <label>Fats:</label>
+                <input type="text" name="Fats" value="@Model.Fats" class="form-control" />
+                <label>Carbs:</label>
+                <input type="text" name="Carbs" value="@Model.Carbs" class="form-control" />
+                <label>Calories:</label>
+                <input type="text" name="Calories" value="@Model.Calories" class="form-control" />
+            </div>
+
+            <br />
+            <div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                <input type="hidden" name="ProductName" value="@Model.ProductName" />
+                <input type="hidden" name="CatName" value="@Model.CatName" />
+                <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
+            </div>
+            
+        </form>
+    </div>
+</div>
+

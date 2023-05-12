@@ -1,7 +1,116 @@
-﻿
+﻿@model UserMealtimeViewModel
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>User</h1>
+<div class="Entete text-center">
+    <div><h3>User</h3></div>
+    <div class="spinner-grow text-muted"></div>
+    <div class="spinner-grow text-primary"></div>
+    <div class="spinner-grow text-success"></div>
+    <div class="spinner-grow text-info"></div>
+</div>
+
+<div class="row">
+    <div class="Category-section col-2">
+        <div class="Category"><h6>Mealtime</h6></div>
+        <hr />
+        <div class="row">
+            <ul class ="navbar-nav flex-grow-1">
+                <!-- print mealtime names -->
+                @foreach (string name in Model.MealtimeNames)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark subCategory" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@name" asp-route-categoryChoice=""><h7 class="subCategory">@name</h7></a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="Category-section col-2">
+        <div class="Category"><h6>Category</h6></div>
+        <hr />
+        <div class="row">
+            <ul class="navbar-nav flex-grow-1">
+                @foreach (var m in Model.Mealtimes)
+                {
+                    if(m.MealtimeName == Model.MealtimeChoice)
+                    {
+                        <!-- print category names according to the mealtime chosen by the user -->
+                        foreach(var c in m.Categories)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark subCategory" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name"><h7 class="subCategory">@c.Name</h7></a>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    
+    <div class="Details col-8">
+        <div>
+            <div><h6>Details</h6></div>
+            <hr />
+            <div class="row text-center justify-content-center">
+                @foreach (var m in Model.Mealtimes)
+                {
+                    @if (m.MealtimeName == Model.MealtimeChoice)
+                    {
+                        @foreach (var c in m.Categories)
+                        {
+                            if (c.Name == Model.CategoryChoice)
+                            {
+                                <!-- print products according to the category chosen by the user -->
+                                @foreach (var p in c.Products)
+                                {
+                                    <div class="Product-block col-sm-6 col-md-3 col-lg-3">
+                                        @if (p.CategoryName == "Алкоголь")
+                                        {
+                                            <h6><span class="fa-solid fa-wine-bottle fa-shake fa-2x orange"></span> @p.ProductName</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6>@p.ProductName</h6>
+                                        }
+                                        <hr />
+                                        <div class="row justify-content-center">
+                                            @*<div class="col-6"><p>Gramms: @p.Gramms g</p></div>*@
+                                            <div class="Product-block01 col-sm-6 col-md-6 col-lg-6"><p>Protein: @p.Protein</p></div>
+                                            <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Fats: @p.Fats</p></div>
+                                            <div class="Product-block01 col-sm-6 col-md-6 col-lg-6"><p>Carbs: @p.Carbs</p></div>
+                                            <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Calories: @p.Calories</p></div>
+                                        </div>
+                                
+                                        <form asp-controller="User" asp-action="EditUserProduct">
+                                            <button type="submit" class="btn btn-info mt-3">Edit</button>
+                                            <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
+                                            <input type="hidden" name="ProductName" value="@p.ProductName" />
+                                            <input type="hidden" name="Gramms" value="@p.Gramms" />
+                                            <input type="hidden" name="Protein" value="@p.Protein" />
+                                            <input type="hidden" name="Fats" value="@p.Fats" />
+                                            <input type="hidden" name="Carbs" value="@p.Carbs" />
+                                            <input type="hidden" name="Calories" value="@p.Calories" />
+                                            <input type="hidden" name="CatName" value="@p.CategoryName" />
+                                        </form>
+
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                }
+            </div>
+        </div>
+
+        <br />
+        <!-- Turquoise -->
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBar%">@Model.ProgressBar</div>
+        </div>
+        
+    </div>
+</div>
 

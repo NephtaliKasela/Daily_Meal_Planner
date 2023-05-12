@@ -17,7 +17,7 @@
         <div class="Category"><h6>Category</h6></div>
         <hr />
         <div class="row">
-            <ul>
+            <ul class="navbar-nav flex-grow-1">
                 @foreach (string name in Model.CategoryList)
                 {
                     <li class="nav-item">
@@ -38,7 +38,7 @@
                 {
                     @foreach(var p in c.Products)
                     {
-                        <div class="formation-block col-sm-6 col-md-3 col-lg-3">
+                        <div class="Product-block col-sm-6 col-md-3 col-lg-3">
                             @if (p.CategoryName == "Алкоголь")
                             {
                                 <h6><span class="fa-solid fa-wine-bottle fa-shake fa-2x orange"></span> @p.Name</h6>
@@ -48,13 +48,14 @@
                                 <h6>@p.Name</h6>
                             }
                             <hr />
-                            <p>Gramms: @p.Gramms g</p>
-                            <p>Protein: @p.Protein</p>
-                            <p>Fats: @p.Fats</p>
-                            <p>Carbs: @p.Carbs</p>
-                            <p>Calories: @p.Calories</p>
-
-                            <hr />
+                            <div class="row justify-content-center">
+                                @*<div class="col-6"><p>Gramms: @p.Gramms g</p></div>*@
+                                <div class="Product-block01 col-sm-6 col-md-6 col-lg-6"><p>Protein: @p.Protein</p></div>
+                                <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Fats: @p.Fats</p></div>
+                                <div class="Product-block01 col-sm-6 col-md-6 col-lg-6"><p>Carbs: @p.Carbs</p></div>
+                                <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Calories: @p.Calories</p></div>
+                            </div>
+                            
                             <form asp-controller="Mealtime" asp-action="index">
                                 <button type="submit" class="btn btn-info mt-3">Add</button>
                                 <input type="hidden" name="ProductName" value="@p.Name" />
@@ -63,7 +64,7 @@
                                 <input type="hidden" name="Fats" value="@p.Fats" />
                                 <input type="hidden" name="Carbs" value="@p.Carbs" />
                                 <input type="hidden" name="Calories" value="@p.Calories" />
-                                <input type="hidden" name="CategoryName" value="@p.CategoryName" />
+                                <input type="hidden" name="CatName" value="@p.CategoryName" />
                                 
                             </form>
                             

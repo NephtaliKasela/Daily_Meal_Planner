@@ -21,5 +21,6 @@ namespace BusinessLayer
         public double Calories { get; set; }
         public string CategoryName { get; set; }
         public string Mealtime { get; set; }
+        public bool State { get; set; }
     }
 }

@@ -8,6 +8,6 @@
         public double Fats { get; set; }
         public double Carbs { get; set; }
         public double Calories { get; set; }
-        public string CategoryName { get; set; }
+        public string CatName { get; set; }
     }
 }
