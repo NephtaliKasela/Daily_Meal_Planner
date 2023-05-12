@@ -18,7 +18,7 @@ namespace DataLayer
 
         public List<Product> GetAllProducts()
         {
-            return _context.Products.ToList();
+            return _context.Products.Where(p => p.State == true).ToList();
         }
 
         public List<Category> GetCategoryProducts(List<Product> Products)

@@ -10,7 +10,8 @@ namespace Daily_Meal_Planner.Models
 
         public string MealtimeChoice { get; set; }
         public string CategoryChoice { get; set; }
-        public int ProgressBar { get; set; }
+        public int ProgressBarMT { get; set; }
+        public int ProgressBarC { get; set; }
 
         public UserMealtimeViewModel() 
         {
@@ -19,7 +20,8 @@ namespace Daily_Meal_Planner.Models
             CategoryNames = new List<string>(); 
             MealtimeChoice= string.Empty;
             CategoryChoice= string.Empty;
-            ProgressBar= 0;
+            ProgressBarMT= 0;
+            ProgressBarC= 0;
         }
     }
 }

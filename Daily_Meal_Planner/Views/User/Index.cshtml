@@ -12,22 +12,42 @@
     <div class="spinner-grow text-info"></div>
 </div>
 
-<div class="row">
-    <div class="Category-section col-2">
-        <div class="Category"><h6>Mealtime</h6></div>
-        <hr />
-        <div class="row">
-            <ul class ="navbar-nav flex-grow-1">
-                <!-- print mealtime names -->
-                @foreach (string name in Model.MealtimeNames)
+
+<form asp-controller="User" asp-action="index">
+    <div class="Category-block">
+        <div>
+            <select name="mealtimeChoice" class="form-control">
+                @if ((Model.MealtimeChoice == string.Empty || @Model.MealtimeChoice == null) && Model.MealtimeNames.Count > 0)
                 {
-                    <li class="nav-item">
-                        <a class="nav-link text-dark subCategory" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@name" asp-route-categoryChoice=""><h7 class="subCategory">@name</h7></a>
-                    </li>
+                    Model.MealtimeChoice = Model.MealtimeNames[0];
                 }
-            </ul>
+                @if (@Model.MealtimeChoice == string.Empty || @Model.MealtimeChoice == null)
+                {
+                    @foreach (string name in Model.MealtimeNames)
+                    {
+                        <option>@name</option>
+                    }
+                }
+                else
+                {
+                    <option>@Model.MealtimeChoice</option>
+                    @foreach (string name in Model.MealtimeNames)
+                    {
+                        if (name != Model.MealtimeChoice)
+                        {
+                            <option>@name</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="justify-content-center">
+            <button type="submit" class="btn btn-outline-info mt-2">Search</button>
         </div>
     </div>
+</form>
+
+<div class="row">
     <div class="Category-section col-2">
         <div class="Category"><h6>Category</h6></div>
         <hr />
@@ -77,15 +97,15 @@
                                         }
                                         <hr />
                                         <div class="row justify-content-center">
-                                            @*<div class="col-6"><p>Gramms: @p.Gramms g</p></div>*@
-                                            <div class="Product-block01 col-sm-6 col-md-6 col-lg-6"><p>Protein: @p.Protein</p></div>
-                                            <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Fats: @p.Fats</p></div>
-                                            <div class="Product-block01 col-sm-6 col-md-6 col-lg-6"><p>Carbs: @p.Carbs</p></div>
-                                            <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Calories: @p.Calories</p></div>
+                                            <div class="Product-block01 col-12"><p>Gramms: @p.Gramms g</p></div>
+                                            <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Protein: @p.Protein</p></div>
+                                            <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Fats: @p.Fats</p></div>
+                                            <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Carbs: @p.Carbs</p></div>
+                                            <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Calories: @p.Calories</p></div>
                                         </div>
                                 
                                         <form asp-controller="User" asp-action="EditUserProduct">
-                                            <button type="submit" class="btn btn-info mt-3">Edit</button>
+                                            <button type="submit" class="btn btn-outline-dark mt-3">Edit</button>
                                             <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
                                             <input type="hidden" name="ProductName" value="@p.ProductName" />
                                             <input type="hidden" name="Gramms" value="@p.Gramms" />
@@ -104,13 +124,21 @@
                 }
             </div>
         </div>
+    </div>
 
-        <br />
+    <div class="Category-section col-2">
+        <div class="Category"><h6>Result</h6></div>
+        <hr />
         <!-- Turquoise -->
+        <label>CAT</label>
         <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBar%">@Model.ProgressBar</div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarC%">@Model.ProgressBarC%</div>
         </div>
-        
+        <br />
+        <label>MT</label>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarMT%">@Model.ProgressBarMT%</div>  
+        </div>
     </div>
 </div>
 

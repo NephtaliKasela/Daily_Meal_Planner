@@ -18,12 +18,28 @@ body {
 }
 
 .Entete {
-    background-color: darkgoldenrod;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    margin-bottom: 5px;
+    /*    background-color: darkgoldenrod;*/
+    background-color: black;
+    color: darkgoldenrod;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    margin-bottom: 15px;
+    border-radius: 5px;
 }
 
+.Category-block {
+    background-color: #F5F5F5;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 15px;
+    /*border: 0.5px solid orange;*/
+    border-radius: 5px;
+}
+/*.Details {
+    background-color:#F5F5F5;
+}*/
 .Category-section {
     background-color: #F5F5F5;
     border: solid orange;
@@ -32,22 +48,11 @@ body {
     border-bottom: 1px;
 }
 
-/*.Category {
-    background-color: gray;
-}*/
-
 .subCategory {
     color: tomato;
 }
-/*.Details {
-    background-color:#F5F5F5;
-}*/
-/*.formation-block {
-    background-color: #F5F5F5;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin: 2px;
-}*/
+
+
 
 .orange {
     color: orange;
@@ -82,12 +87,10 @@ body {
     margin-top: 2px;
     margin-bottom: 2px;
     border: 0.5px solid orange;
-    border-top: 1px;
+    /*border-top: 1px;
     border-bottom: 1px;
-    border-left: 1px;
+    border-left: 1px;*/
     padding: 0px;
-    /*margin-left: 1px;
-    margin-right: 1px;*/
 }
 
 .Product-block02 {
@@ -98,8 +101,20 @@ body {
     border: 0.5px solid orange;
     border-top: 1px;
     border-bottom: 1px;
+    border-left: 1px;
+    padding: 0px;
+}
+
+.Product-block03 {
+    background-color: white;
+    color: darkgoldenrod;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 0.5px solid orange;
+    border-top: 1px;
+    border-bottom: 1px;
     border-right: 1px;
     padding: 0px;
-    /*margin-left: 1px;
-    margin-right: 1px;*/
 }
+
+

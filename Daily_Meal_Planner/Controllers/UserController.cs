@@ -23,29 +23,38 @@ namespace Daily_Meal_Planner.Controllers
             var vm = new UserMealtimeViewModel();
             vm.Mealtimes = mealtimes;
 
+            if ((mealtimeChoice == string.Empty || mealtimeChoice == null) && vm.Mealtimes.Count > 0)
+            {
+                vm.MealtimeChoice = vm.Mealtimes[0].MealtimeName;
+            }
+            else
+            {
+                vm.MealtimeChoice = mealtimeChoice;
+                vm.CategoryChoice = categoryChoice;
+            }
+            
             // Get all mealtime names
             foreach (UserMealtime m in mealtimes)
             {
                 vm.MealtimeNames.Add(m.MealtimeName);
 
-                if(m.MealtimeName == mealtimeChoice)
+                if(m.MealtimeName == mealtimeChoice || m.MealtimeName == vm.MealtimeChoice)
                 {
                     foreach(UserCategory uc in m.Categories)
                     {
-                        //if(uc.Name == categoryChoice)
-                        //{
-                        //    // get progress bar by category 
-                        //    foreach (UserProduct up in uc.Products)
-                        //    {
-                        //        vm.ProgressBar += (int)(up.Protein + up.Fats + up.Carbs + up.Calories);
-                        //    }
-
-                        //}
+                        if (uc.Name == categoryChoice)
+                        {
+                            // get progress bar by category 
+                            foreach (UserProduct up in uc.Products)
+                            {
+                                vm.ProgressBarC += (int)(up.Protein + up.Fats + up.Carbs + up.Calories);
+                            }
+                        }
 
                         // get progress bar by mealtime
                         foreach (UserProduct up in uc.Products)
                         {
-                            vm.ProgressBar += (int)(up.Protein + up.Fats + up.Carbs + up.Calories);
+                            vm.ProgressBarMT += (int)(up.Protein + up.Fats + up.Carbs + up.Calories);
                         }
                     }
                 }
@@ -60,9 +69,6 @@ namespace Daily_Meal_Planner.Controllers
                 }
             }
             
-            vm.MealtimeChoice = mealtimeChoice;
-            vm.CategoryChoice = categoryChoice;
-
             return View(vm);
         }
 

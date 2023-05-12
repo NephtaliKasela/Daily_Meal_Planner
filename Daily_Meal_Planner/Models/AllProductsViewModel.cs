@@ -12,6 +12,7 @@ namespace Daily_Meal_Planner.Models
         { 
             Categories = new List<Category>();
             CategoryList = new List<string>();
+            CatName= string.Empty;
         }
     }
 }
