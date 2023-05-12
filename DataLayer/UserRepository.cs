@@ -25,12 +25,12 @@ namespace DataLayer
 
         public List<UserProduct> GetAllUserProducts()
         {
-            return _context.UserProducts.Where(p => p.State == false).ToList();
+            return _context.UserProducts.Where(p => p.State == true).ToList();
         }
 
         public List<UserProduct> GetUserProductsByName(string username)
         {
-            return _context.UserProducts.Where(p => p.UserName == username).ToList();
+            return _context.UserProducts.Where(p => p.UserName == username && p.State == true).ToList();
         }
 
         public List<UserCategory> GetCategoryProducts(List<UserProduct> Products)
