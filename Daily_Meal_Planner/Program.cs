@@ -18,6 +18,7 @@ builder.Services.AddDbContext<MyDBContext>(options =>
 
 builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IMealtimeRepository, MealtimeRepository>();
 
 builder.Services.AddResponseCompression(options =>
 {

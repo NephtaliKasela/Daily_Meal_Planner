@@ -6,6 +6,6 @@ namespace DataLayer
     {
         public List<Product> GetAllProducts();
         public List<Category> GetCategoryProducts(List<Product> Products);
-        public void ReadData(string path);
+        public void ReadData();
     }
 }

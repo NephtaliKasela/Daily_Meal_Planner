@@ -8,17 +8,24 @@ namespace Daily_Meal_Planner.Controllers
     public class MealtimeController : Controller
     {
         public IUserRepository _userRepository;
+        public IMealtimeRepository _mealtimeRepository;
 
-        public MealtimeController(IUserRepository userRepository)
+        public MealtimeController(IUserRepository userRepository, IMealtimeRepository mealtimeRepository)
         {
-            _userRepository = userRepository;
+            this._userRepository = userRepository;
+            this._mealtimeRepository = mealtimeRepository;
         }
 
         public IActionResult Index(ProductViewModel productViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("index", "Home");
+                return RedirectToAction("index", "Home");
+            }
+
+            foreach(UserMealtime um in _mealtimeRepository.GetUserMealtimes())
+            {
+                productViewModel.Mealtimes.Add(um.MealtimeName);
             }
 
             return View(productViewModel);
@@ -29,7 +36,8 @@ namespace Daily_Meal_Planner.Controllers
             //List<UserProduct> userProducts = new List<UserProduct>();
             var userProducts = _userRepository.GetAllUserProducts();
             _userRepository.SaveUserProduct(userProducts, productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName);
-            return View();
+            
+            return RedirectToAction("index", "Home");
         }
     }
 }

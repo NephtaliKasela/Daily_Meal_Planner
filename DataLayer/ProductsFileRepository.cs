@@ -64,40 +64,31 @@ namespace DataLayer
             return categories;
         }
 
-        public void ReadData(string path)
+        public void ReadData()
         {
             //Créer un document XML
-            XmlDocument xmlDocument = new XmlDocument();
+            //XmlDocument xmlDocument = new XmlDocument();
 
             //Lire le fichier XML
-            xmlDocument.Load(path);
+            //xmlDocument.Load(path);
             //string s = xmlDocument.ToString();
 
-            string jsonText = JsonConvert.SerializeXmlNode(xmlDocument);
-            string chemin = @"C:\\Nephterland\\COURSES\\PROGRAMMING\\UNIVERSITY\\VsProjets\\C_Sharp\\Web\\Daily_Meal_Planner\\Daily_Meal_Planner\\bin\\Debug\\net6.0\\Test\\test.txt";
-            string chemin2 = @"C:\\Nephterland\\COURSES\\PROGRAMMING\\UNIVERSITY\\VsProjets\\C_Sharp\\Web\\Daily_Meal_Planner\\Daily_Meal_Planner\\bin\\Debug\\net6.0\\Test\\test2.txt";
-            string chemin3 = @"C:\\Nephterland\\COURSES\\PROGRAMMING\\UNIVERSITY\\VsProjets\\C_Sharp\\Web\\Daily_Meal_Planner\\Daily_Meal_Planner\\bin\\Debug\\net6.0\\Test\\test3.txt";
-            
-            chemin = chemin.Replace(@"\\", "/");
-            chemin2 = chemin2.Replace(@"\\", "/");
-            chemin3 = chemin3.Replace(@"\\", "/");
-            File.WriteAllText(chemin, jsonText);
+            //string jsonText = JsonConvert.SerializeXmlNode(xmlDocument);
 
-            string[] ss = jsonText.Split("Category");
-            File.WriteAllText(chemin2, "");
-            foreach (string ss2 in ss)
-            {
-                File.AppendAllText(chemin2, ss2 + "\n\n");
-            }
+            string chemin4 = @"C:\Nephterland\COURSES\PROGRAMMING\UNIVERSITY\VsProjets\C_Sharp\Web\Folder\Daily_Meal_Planner\DataLayer\bin\Debug\net6.0\DM_Products.json";
 
-            var dic = JsonConvert.DeserializeObject<IDictionary>(jsonText);
+            chemin4 = chemin4.Replace(@"\\", "/");
+            string[] arr = chemin4.Split("/");
+            string jsonText = arr[arr.Length -1];
 
-            foreach (IList d in dic.Values)
-            {
-                string strJsonFile = d.ToString();
-                //var list = JsonConvert.DeserializeObject<IList>(jsonText);
-                File.AppendAllText(chemin3, strJsonFile + "\n\n");
-            }
+            var catDic = JsonConvert.DeserializeObject<IDictionary>(jsonText);
+
+            //foreach (IList cd in catDic)
+            //{
+            //    //string strJsonFile = d.ToString();
+            //    //var list = JsonConvert.DeserializeObject<IList>(jsonText);
+            //    //File.AppendAllText(chemin3, strJsonFile + "\n\n");
+            //}
 
             //StreamReader reader = new StreamReader(jsonText);
             //while (!reader.EndOfStream)

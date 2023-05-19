@@ -48,21 +48,36 @@
 </form>
 
 <div class="row">
-    <div class="Category-section col-2">
-        <div class="Category"><h6>Category</h6></div>
+    <div class="Category-section-user col-2">
+        <div class="Header-section-user"><h6>Category</h6></div>
         <hr />
-        <div class="row">
+        <div>
             <ul class="navbar-nav flex-grow-1">
                 @foreach (var m in Model.Mealtimes)
                 {
-                    if(m.MealtimeName == Model.MealtimeChoice)
+                    @if(m.MealtimeName == Model.MealtimeChoice)
                     {
                         <!-- print category names according to the mealtime chosen by the user -->
-                        foreach(var c in m.Categories)
+                        @foreach(var c in m.Categories)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark subCategory" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name"><h7 class="subCategory">@c.Name</h7></a>
-                            </li>
+                            @if(c.Name == Model.CategoryChoice)
+                            {
+                                @*<div class="CategoryNameBg-select">*@
+                                <li class="nav-item CategoryNameBg-select">
+                                        <a class="nav-link CategoryNameCol-select" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name"><h7 class="subCategory">@c.Name</h7></a>
+                                    </li>
+                                @*</div>*@
+                            }
+                            else
+                            {
+                                @*<div class="CategoryNameBg-nselect">*@
+                                <li class="nav-item CategoryNameBg-nselect">
+                                        <a class="nav-link CategoryNameCol-nselect" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name"><h7 class="subCategory">@c.Name</h7></a>
+                                    </li>
+                                @*</div>*@
+                            }
+                            
+                            
                         }
                     }
                 }
@@ -72,7 +87,7 @@
     
     <div class="Details col-8">
         <div>
-            <div><h6>Details</h6></div>
+            <div class="Header-section-user"><h6>Details</h6></div>
             <hr />
             <div class="row text-center justify-content-center">
                 @foreach (var m in Model.Mealtimes)
@@ -126,8 +141,8 @@
         </div>
     </div>
 
-    <div class="Category-section col-2">
-        <div class="Category"><h6>Result</h6></div>
+    <div class="Result-section-user col-2">
+        <div class="Header-section-user"><h6>Result</h6></div>
         <hr />
         <!-- Turquoise -->
         <label>CAT</label>
@@ -139,6 +154,7 @@
         <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarMT%">@Model.ProgressBarMT%</div>  
         </div>
+        <br />
     </div>
 </div>
 

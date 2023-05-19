@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataLayer
 {
@@ -120,8 +121,25 @@ namespace DataLayer
             prod.Carbs = Convert.ToDouble(Carbs);
             prod.Calories = Convert.ToDouble(Calories);
             prod.CategoryName = CategoryName;
+            prod.State = true;
 
-            _context.UserProducts.Add(prod);
+            // Add the product
+            // Check if the product is already in the user products list
+            int flag = 0;
+            foreach(UserProduct up in _context.UserProducts)
+            {
+                flag = 1;
+                if((up.Mealtime != mealtimeChoice && up.CategoryName != CategoryName) || (up.Mealtime == mealtimeChoice && up.CategoryName != CategoryName))
+                {
+                    _context.UserProducts.Add(prod);
+                    flag = 2;
+                    break;
+                }
+            }
+            if (flag == 0)
+            {
+                _context.UserProducts.Add(prod);
+            }
             _context.SaveChanges();
         }
 

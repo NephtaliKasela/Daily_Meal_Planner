@@ -20,6 +20,11 @@ namespace Daily_Meal_Planner.Controllers
 
         public IActionResult Index(string catName)
         {
+            //ProductsFileRepository r = new ProductsFileRepository();
+            //r.ReadData();
+
+
+
             List<Product> products = new List<Product>();
             products = _productRepository.GetAllProducts();
 

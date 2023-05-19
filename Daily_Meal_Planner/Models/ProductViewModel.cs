@@ -9,5 +9,11 @@
         public double Carbs { get; set; }
         public double Calories { get; set; }
         public string CatName { get; set; }
+        public List<string> Mealtimes { get; set; }
+
+        public ProductViewModel()
+        {
+            Mealtimes = new List<string>();
+        }
     }
 }

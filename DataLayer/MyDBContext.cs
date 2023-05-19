@@ -15,6 +15,7 @@ namespace DataLayer
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserProduct> UserProducts { get; set; }
+        public DbSet<UserMealtime> UserMealtime { get; set; }
 
         //get data
         ProductsFileRepository repository = new ProductsFileRepository();

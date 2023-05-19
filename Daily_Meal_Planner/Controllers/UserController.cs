@@ -72,6 +72,11 @@ namespace Daily_Meal_Planner.Controllers
             return View(vm);
         }
 
+        public IActionResult Login()
+        { 
+            return View(); 
+        }
+
         public IActionResult EditUserProduct(ProductAndMealtimeViewModel productAndMealtimeViewModel)
         {
             return View(productAndMealtimeViewModel);
@@ -81,12 +86,12 @@ namespace Daily_Meal_Planner.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest();
+                return RedirectToAction("EditAndSaveUserProduct");
             }
 
             _userRepository.EditAndSaveUserProduct(productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName); 
 
-            return View();
+            return RedirectToAction("index", "User");
         }
     }
 }

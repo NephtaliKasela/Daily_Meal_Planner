@@ -57,7 +57,7 @@ namespace DataLayer
             return categories;
         }
 
-        public void ReadData(string path)
+        public void ReadData()
         {
         }
     }

@@ -4,13 +4,12 @@
     ViewData["Title"] = "EditUserProduct";
 }
 
-<h1>EditUserProduct</h1>
-
+<br />
 <br />
 
 <div class="row justify-content-center container01">
-    <div class="subContainer col-sm-4 col-md-4 col-lg-6">
-        <div>
+    <div class="subContainer col-sm-12 col-md-8 col-lg-6">
+        <div class="text-center">
             <h5>@Model.ProductName</h5>
             <hr />
         </div>
@@ -29,14 +28,19 @@
             </div>
 
             <br />
-            <div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                <input type="hidden" name="ProductName" value="@Model.ProductName" />
-                <input type="hidden" name="CatName" value="@Model.CatName" />
-                <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
+            <div class="row justify-content-center text-center">
+                <div class="btn-submit01 col-6">
+                    <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+                    <input type="hidden" name="ProductName" value="@Model.ProductName" />
+                    <input type="hidden" name="CatName" value="@Model.CatName" />
+                    <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
+                </div>
+                <div class="btn-Delete01 col-6">
+                    <button type="submit" class="btn btn-outline-danger mt-3">Delete</button>
+                </div>
             </div>
             
         </form>
     </div>
 </div>
-
+<br />
