@@ -78,11 +78,11 @@
                             }
                             <hr />
                             <div class="row justify-content-center">
-                                <div class="Product-block01 col-12"><p>Gramms: @p.Gramms g</p></div>
-                                <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Protein: @p.Protein</p></div>
-                                <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Fats: @p.Fats</p></div>
-                                <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Carbs: @p.Carbs</p></div>
-                                <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Calories: @p.Calories</p></div>
+                                <div class="Product-block01 col-12"><p>Gramms <strong>@p.Gramms g</strong></p></div>
+                                <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Protein <strong>@p.Protein</strong></p></div>
+                                <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Fats <strong>@p.Fats</strong></p></div>
+                                <div class="Product-block02 col-sm-6 col-md-6 col-lg-6"><p>Carbs <strong>@p.Carbs</strong></p></div>
+                                <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Calories <strong>@p.Calories</strong></p></div>
                             </div>
                             
                             <form asp-controller="Mealtime" asp-action="index">
@@ -116,11 +116,11 @@
     </div>
     <div class="offcanvas-body">
         <div class="row justify-content-center container01">
-            <div class="subContainer col-sm-12 col-md-6 col-lg-6">
-                <div class="Category-section col-12">
+            <div class="subContainer col-sm-10 col-md-10 col-lg-10">
+                <div class="Category-section text-center col-12">
                     <div><h6>Category</h6></div>
                     <hr />
-                    <div class="row">
+                    <div>
                         <ul class="navbar-nav flex-grow-1">
                             @foreach (string name in Model.CategoryList)
                             {

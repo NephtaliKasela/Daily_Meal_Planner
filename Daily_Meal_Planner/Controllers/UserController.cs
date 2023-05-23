@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using Daily_Meal_Planner.Models;
 using DataLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daily_Meal_Planner.Controllers
@@ -14,6 +15,7 @@ namespace Daily_Meal_Planner.Controllers
             _userRepository = userRepository;
         }
 
+        [Authorize]
         public IActionResult Index(string mealtimeChoice, string categoryChoice)
         {
             List<UserProduct> products = _userRepository.GetAllUserProducts();

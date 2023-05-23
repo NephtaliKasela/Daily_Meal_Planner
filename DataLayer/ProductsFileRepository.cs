@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -64,7 +65,7 @@ namespace DataLayer
             return categories;
         }
 
-        public void ReadData()
+        public List<Product> ReadData()
         {
             //Créer un document XML
             //XmlDocument xmlDocument = new XmlDocument();
@@ -75,28 +76,80 @@ namespace DataLayer
 
             //string jsonText = JsonConvert.SerializeXmlNode(xmlDocument);
 
-            string chemin4 = @"C:\Nephterland\COURSES\PROGRAMMING\UNIVERSITY\VsProjets\C_Sharp\Web\Folder\Daily_Meal_Planner\DataLayer\bin\Debug\net6.0\DM_Products.json";
+            List<Product> products = new List<Product>();
 
-            chemin4 = chemin4.Replace(@"\\", "/");
-            string[] arr = chemin4.Split("/");
-            string jsonText = arr[arr.Length -1];
+            string chemin = @"C:\Nephterland\COURSES\PROGRAMMING\UNIVERSITY\VsProjets\C_Sharp\Web\Folder\Daily_Meal_Planner\DataLayer\bin\Debug\net6.0\DM_Products\products.json";
 
-            var catDic = JsonConvert.DeserializeObject<IDictionary>(jsonText);
+            chemin = chemin.Replace(@"\", "/");
+            string[] arr = chemin.Split("/");
+            string jsonFile = arr[arr.Length - 2] + "/" + arr[arr.Length -1];
+         
 
-            //foreach (IList cd in catDic)
-            //{
-            //    //string strJsonFile = d.ToString();
-            //    //var list = JsonConvert.DeserializeObject<IList>(jsonText);
-            //    //File.AppendAllText(chemin3, strJsonFile + "\n\n");
-            //}
+            var stream = File.OpenText(chemin);
+            string jsonArray = stream.ReadToEnd();
 
-            //StreamReader reader = new StreamReader(jsonText);
-            //while (!reader.EndOfStream)
-            //{
-            //    string line = reader.ReadLine();
-            //    File.AppendAllText("Test/test.txt", line + "\n\n");
-            //}
+            var result = JsonConvert.DeserializeObject<IList>(jsonArray);
 
+            foreach (IList r in result)
+            {
+                string categoryName = string.Empty;
+                
+                string str = r.ToString();
+                var jsonStr = JsonConvert.DeserializeObject<IDictionary>(str);
+
+                foreach(DictionaryEntry r1 in jsonStr)
+                {
+                    if (r1.Key.ToString() == "@name")
+                    {
+                        categoryName = r1.Value.ToString();
+                    }
+                    else if (r1.Key.ToString() == "Product")
+                    {
+                        string str2 = r1.Value.ToString();
+                        var jsonStr2 = JsonConvert.DeserializeObject<IList>(str2);
+
+                        foreach (var r2 in jsonStr2)
+                        {
+                            Product product = new Product();
+
+                            string str3 = r2.ToString();
+                            var jsonStr3 = JsonConvert.DeserializeObject<IDictionary>(str3);
+                            
+                            product.CategoryName = categoryName;
+
+                            foreach(DictionaryEntry prod in jsonStr3)
+                            {
+                                if (prod.Key.ToString() == "Name")
+                                {
+                                    product.Name = prod.Value.ToString();
+                                }
+                                else if (prod.Key.ToString() == "Gramms")
+                                {
+                                    product.Gramms = double.Parse(prod.Value.ToString());
+                                }
+                                else if (prod.Key.ToString() == "Protein")
+                                {
+                                    product.Protein = double.Parse(prod.Value.ToString());
+                                }
+                                else if (prod.Key.ToString() == "Fats")
+                                {
+                                    product.Fats = double.Parse(prod.Value.ToString());
+                                }
+                                else if (prod.Key.ToString() == "Carbs")
+                                {
+                                    product.Carbs = double.Parse(prod.Value.ToString());
+                                }
+                                else if (prod.Key.ToString() == "Calories")
+                                {
+                                    product.Calories = double.Parse(prod.Value.ToString());
+                                }
+                            }
+                            products.Add(product);
+                        }
+                    }
+                }  
+            }
+            return products;
         }
 
         

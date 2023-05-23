@@ -19,10 +19,17 @@ namespace DataLayer
 
         //get data
         ProductsFileRepository repository = new ProductsFileRepository();
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().HasData(repository.GetAllProducts());
+            int count = 0;
+            foreach (Product p in repository.ReadData())
+            {
+                modelBuilder.Entity<Product>().HasData(
+                    new Product {Id = count + 1, Name = p.Name, Protein = p.Protein, Gramms = p.Gramms, Fats = p.Fats, Carbs = p.Carbs, Calories = p.Calories, CategoryName = p.CategoryName, State = false}
+
+                );
+                count++;
+            }
         }
     }
 }

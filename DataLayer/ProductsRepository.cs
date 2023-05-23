@@ -57,8 +57,9 @@ namespace DataLayer
             return categories;
         }
 
-        public void ReadData()
+        public List<Product> ReadData()
         {
+            return null;
         }
     }
 }
