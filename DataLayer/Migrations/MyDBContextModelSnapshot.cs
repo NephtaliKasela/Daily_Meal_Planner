@@ -10877,6 +10877,10 @@ namespace DataLayer.Migrations
                     b.Property<int?>("UserCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 

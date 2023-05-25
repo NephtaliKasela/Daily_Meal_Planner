@@ -37,7 +37,7 @@ namespace Daily_Meal_Planner.Controllers
         {
             //List<UserProduct> userProducts = new List<UserProduct>();
             var userProducts = _userRepository.GetAllUserProducts();
-            _userRepository.SaveUserProduct(userProducts, productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName);
+            _userRepository.SaveUserProduct(userProducts, productAndMealtimeViewModel.UserNameOrEmail, productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName);
             
             return RedirectToAction("index", "Home");
         }

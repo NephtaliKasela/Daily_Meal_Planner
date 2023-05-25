@@ -12,8 +12,7 @@
     <div class="spinner-grow text-info"></div>
 </div>
 
-
-<form asp-controller="User" asp-action="index">
+<form asp-controller="User" asp-action="index" asp-action="Index" asp-route-username="@User.Identity?.Name">
     <div class="Category-block">
         <div>
             <select name="mealtimeChoice" class="form-control">
@@ -49,8 +48,11 @@
 
 <div class="row">
     <div class="Category-section-user col-2">
-        <div class="Header-section-user"><h6>Category</h6></div>
-        <hr />
+        <div class="Header-section-user"><h6>Categories</h6></div>
+        <div class="progress" style="height:2px">
+            <div class="progress-bar bg-success" style="width:@Model.ProgressBarC%; height:2px"></div>
+        </div>
+        <br />
         <div>
             <ul class="navbar-nav flex-grow-1">
                 @foreach (var m in Model.Mealtimes)
@@ -62,22 +64,16 @@
                         {
                             @if(c.Name == Model.CategoryChoice)
                             {
-                                @*<div class="CategoryNameBg-select">*@
                                 <li class="nav-item CategoryNameBg-select">
-                                        <a class="nav-link CategoryNameCol-select" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name"><h7 class="subCategory">@c.Name</h7></a>
-                                    </li>
-                                @*</div>*@
+                                    <a class="nav-link CategoryNameCol-select" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name" asp-action="Index" asp-route-username="@User.Identity?.Name"><h7 class="subCategory">@c.Name</h7></a>
+                                </li>
                             }
                             else
                             {
-                                @*<div class="CategoryNameBg-nselect">*@
                                 <li class="nav-item CategoryNameBg-nselect">
-                                        <a class="nav-link CategoryNameCol-nselect" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name"><h7 class="subCategory">@c.Name</h7></a>
-                                    </li>
-                                @*</div>*@
+                                    <a class="nav-link CategoryNameCol-nselect" asp-controller="User" asp-action="index" asp-route-mealtimeChoice="@Model.MealtimeChoice" asp-route-categoryChoice="@c.Name" asp-action="Index" asp-route-username="@User.Identity?.Name"><h7 class="subCategory">@c.Name</h7></a>
+                                </li>
                             }
-                            
-                            
                         }
                     }
                 }
@@ -85,10 +81,13 @@
         </div>
     </div>
     
-    <div class="Details col-8">
+    <div class="Details col-10">
         <div>
-            <div class="Header-section-user"><h6>Details</h6></div>
-            <hr />
+            @*<div class="Header-section-user"><h6>Details</h6></div>*@
+            <div class="Header-section-user"><i class="fa-solid fa-universal-access fa-10 orange"></i></div>
+            <div class="progress" style="height:2px">
+                <div class="progress-bar bg-success" style="width:@Model.ProgressBarMT%; height:2px"></div>
+            </div>
             <div class="row text-center justify-content-center">
                 @foreach (var m in Model.Mealtimes)
                 {
@@ -130,7 +129,6 @@
                                             <input type="hidden" name="Calories" value="@p.Calories" />
                                             <input type="hidden" name="CatName" value="@p.CategoryName" />
                                         </form>
-
                                     </div>
                                 }
                             }
@@ -141,20 +139,19 @@
         </div>
     </div>
 
-    <div class="Result-section-user col-2">
+    @*<div class="Result-section-user col-2">
         <div class="Header-section-user"><h6>Result</h6></div>
         <hr />
         <!-- Turquoise -->
-        <label>CAT</label>
+        <label class="text-light">CAT</label>
         <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarC%">@Model.ProgressBarC%</div>
         </div>
         <br />
-        <label>MT</label>
+        <label class="text-light">MT</label>
         <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarMT%">@Model.ProgressBarMT%</div>  
         </div>
         <br />
-    </div>
+    </div>*@
 </div>
-

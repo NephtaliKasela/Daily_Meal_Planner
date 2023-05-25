@@ -2,6 +2,7 @@
 {
     public class ProductAndMealtimeViewModel
     {
+        public string UserNameOrEmail { get; set; }
         public string MealtimeChoice { get; set; }
         public string ProductName { get; set; }
         public double Gramms { get; set; }

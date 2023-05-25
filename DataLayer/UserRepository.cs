@@ -107,11 +107,12 @@ namespace DataLayer
             return mealtimes;
         }
 
-        public void SaveUserProduct(List<UserProduct> products, string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName)
+        public void SaveUserProduct(List<UserProduct> products, string UserNameOrEmail, string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName)
         {
             UserProduct prod = new UserProduct();
 
-            prod.UserName = "Unknown";
+            prod.UserName = UserNameOrEmail;
+            prod.UserEmail = UserNameOrEmail;
             prod.UserId = 0;
             prod.Mealtime = mealtimeChoice;
             prod.ProductName = productName;

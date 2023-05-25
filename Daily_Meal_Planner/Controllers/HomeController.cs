@@ -20,18 +20,14 @@ namespace Daily_Meal_Planner.Controllers
 
         public IActionResult Index(string catName)
         {
-            //ProductsFileRepository pr = new ProductsFileRepository();
-            //List<Product> p = pr.ReadData();
-
-
-
+            // Get all products from the database
             List<Product> products = new List<Product>();
             products = _productRepository.GetAllProducts();
 
             var vm = new AllProductsViewModel();
             vm.Categories = _productRepository.GetCategoryProducts(products);
 
-            // get all names of category products
+            // Get all names of category products
             foreach(var categoryName in vm.Categories)
             {
                 vm.CategoryList.Add(categoryName.Name);

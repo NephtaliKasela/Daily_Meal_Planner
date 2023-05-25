@@ -6,10 +6,10 @@
 
 <div class="Entete text-center">
     @*<div>
-        <img src="images\best-meal-planning-apps_lead.png" />
+        <img src="images\tomatoes-tomatoes-lemon-leaves-garlic-bottle-oil-tree-branches.jpg" alt="" />
     </div>*@
     
-    <div><h3>Dealy Meal Planner</h3></div>
+    <div><h3 class="title">Dealy Meal Planner</h3></div>
     <div class="spinner-grow text-muted"></div>
     <div class="spinner-grow text-primary"></div>
     <div class="spinner-grow text-success"></div>
@@ -57,8 +57,15 @@
     <div class="Details col-12">
         <div>
             <i class="fa-solid fa-universal-access fa-3 orange"></i>
-            <i class="fa-solid fa-universal-access fa-3 orange"></i>
-            <i class="fa-solid fa-universal-access fa-3 orange"></i>
+            @*<i class="fa-solid fa-universal-access fa-3 orange"></i>
+            <i class="fa-solid fa-universal-access fa-3 orange"></i>*@
+            
+            @{int n = 0;}
+            @foreach (var c in Model.Categories.Where(p => p.Name == Model.CatName).ToList())
+            {
+                n += c.Products.Count;
+            }
+            <span class="orange">@n</span>
         </div>
         <div class="row text-center justify-content-center">
             @foreach(var c in Model.Categories)
@@ -105,9 +112,6 @@
 </div>
 
 <br />
-<svg viewBox="10 50 500 100" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#F1C21B" d="M44.7,24.5C32.6,46.7,-20,44.3,-34.2,20.8C-48.3,-2.6,-24.2,-47.1,2.1,-45.9C28.4,-44.7,56.7,2.2,44.7,24.5Z" transform="translate(100 100)" />
-</svg>
 
 <div class="offcanvas offcanvas-start bg-dark" id="demo">
     <div class="offcanvas-header">
@@ -118,7 +122,7 @@
         <div class="row justify-content-center container01">
             <div class="subContainer col-sm-10 col-md-10 col-lg-10">
                 <div class="Category-section text-center col-12">
-                    <div><h6>Category</h6></div>
+                    <div><h6>Categories</h6></div>
                     <hr />
                     <div>
                         <ul class="navbar-nav flex-grow-1">
@@ -137,6 +141,6 @@
 </div>
 
 <!-- Button to open the offcanvas sidebar -->
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+<button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
     Categories
 </button>

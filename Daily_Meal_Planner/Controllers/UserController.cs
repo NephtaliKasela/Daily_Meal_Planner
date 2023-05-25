@@ -16,9 +16,9 @@ namespace Daily_Meal_Planner.Controllers
         }
 
         [Authorize]
-        public IActionResult Index(string mealtimeChoice, string categoryChoice)
+        public IActionResult Index(string mealtimeChoice, string categoryChoice, string username)
         {
-            List<UserProduct> products = _userRepository.GetAllUserProducts();
+            List<UserProduct> products = _userRepository.GetUserProductsByName(username);
             List<UserCategory> categories = _userRepository.GetCategoryProducts(products);
             List<UserMealtime> mealtimes = _userRepository.GetMealtimes(categories);
 

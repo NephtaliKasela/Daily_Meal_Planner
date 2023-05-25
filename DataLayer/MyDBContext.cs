@@ -21,6 +21,7 @@ namespace DataLayer
         ProductsFileRepository repository = new ProductsFileRepository();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Add products data to the database 
             int count = 0;
             foreach (Product p in repository.ReadData())
             {
