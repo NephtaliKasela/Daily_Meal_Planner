@@ -16,7 +16,9 @@
     <div class="spinner-grow text-info"></div>
 </div>
 
-<div>
+
+<div class="body-block03">
+    <div class="mealtimeName-block-user"><h5>Category</h5></div>
     <form asp-controller="Home" asp-action="index">
         <div class="Category-block">
             <div>
@@ -29,7 +31,7 @@
                     {
                         @foreach (string name in Model.CategoryList)
                         {
-                            <option>@name</option>
+                            <option class="NameStyle">@name</option>
                         }
                     }
                     else
@@ -39,7 +41,7 @@
                         {
                             if (name != Model.CatName)
                             {
-                                <option>@name</option>
+                                <option class="NameStyle">@name</option>
                             }
                         }
                     }
@@ -50,23 +52,27 @@
             </div>
         </div>
     </form>
+
+    
 </div>
 
+<div class="body-block02">
+
+<div class="ProdNumber-block">
+    <i class="fa-solid fa-universal-access fa-3 orange"></i>
+    @{
+        int n = 0;
+    }
+    @foreach (var c in Model.Categories.Where(p => p.Name == Model.CatName).ToList())
+    {
+        n += c.Products.Count;
+    }
+    <span class="orange">@n</span>
+</div>  
 
 <div class="row">
     <div class="Details col-12">
-        <div>
-            <i class="fa-solid fa-universal-access fa-3 orange"></i>
-            @*<i class="fa-solid fa-universal-access fa-3 orange"></i>
-            <i class="fa-solid fa-universal-access fa-3 orange"></i>*@
-            
-            @{int n = 0;}
-            @foreach (var c in Model.Categories.Where(p => p.Name == Model.CatName).ToList())
-            {
-                n += c.Products.Count;
-            }
-            <span class="orange">@n</span>
-        </div>
+        
         <div class="row text-center justify-content-center">
             @foreach(var c in Model.Categories)
             {
@@ -74,14 +80,14 @@
                 {
                     @foreach(var p in c.Products)
                     {
-                        <div class="Product-block col-sm-6 col-md-3 col-lg-3">
+                        <div class="Product-block col-sm-4 col-md-3 col-lg-2">
                             @if (p.CategoryName == "Алкоголь")
                             {
-                                <h6><span class="fa-solid fa-wine-bottle fa-shake fa-2x orange"></span> @p.Name</h6>
+                                    <h6 class="NameStyle"><span class="fa-solid fa-wine-bottle fa-shake fa-2x orange"></span> @p.Name</h6>
                             }
                             else
                             {
-                                <h6>@p.Name</h6>
+                                    <h6 class="NameStyle">@p.Name</h6>
                             }
                             <hr />
                             <div class="row justify-content-center">
@@ -93,7 +99,7 @@
                             </div>
                             
                             <form asp-controller="Mealtime" asp-action="index">
-                                <button type="submit" class="btn btn-outline-dark mt-3">Add</button>
+                                <button type="submit" class="btn btn-outline-dark mt-3 NameStyle">Add</button>
                                 <input type="hidden" name="ProductName" value="@p.Name" />
                                 <input type="hidden" name="Gramms" value="@p.Gramms" />
                                 <input type="hidden" name="Protein" value="@p.Protein" />
@@ -110,8 +116,6 @@
         </div>
     </div>
 </div>
-
-<br />
 
 <div class="offcanvas offcanvas-start bg-dark" id="demo">
     <div class="offcanvas-header">
@@ -141,6 +145,10 @@
 </div>
 
 <!-- Button to open the offcanvas sidebar -->
-<button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-    Categories
-</button>
+<div class="btnDownCat">
+    <button class="btn btn-dark NameStyle" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+        Categories
+    </button>
+</div>
+
+</div>

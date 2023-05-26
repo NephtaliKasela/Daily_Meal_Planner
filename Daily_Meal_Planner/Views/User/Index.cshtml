@@ -12,7 +12,9 @@
     <div class="spinner-grow text-info"></div>
 </div>
 
-<form asp-controller="User" asp-action="index" asp-action="Index" asp-route-username="@User.Identity?.Name">
+<div class="body-block03">
+    <div class="mealtimeName-block-user"><h5>Mealtime</h5></div>
+    <form asp-controller="User" asp-action="index" asp-action="Index" asp-route-username="@User.Identity?.Name">
     <div class="Category-block">
         <div>
             <select name="mealtimeChoice" class="form-control">
@@ -45,12 +47,14 @@
         </div>
     </div>
 </form>
+</div>
 
-<div class="row">
+<div class="body-block02">
+<div class="row mealtime-block-user">
     <div class="Category-section-user col-2">
-        <div class="Header-section-user"><h6>Categories</h6></div>
+        <div class="Header-section-user-prod"><h6>Categories</h6></div>
         <div class="progress" style="height:2px">
-            <div class="progress-bar bg-success" style="width:@Model.ProgressBarC%; height:2px"></div>
+            <div class="progress-bar bg-danger" style="width:@Model.ProgressBarC%; height:2px"></div>
         </div>
         <br />
         <div>
@@ -84,9 +88,12 @@
     <div class="Details col-10">
         <div>
             @*<div class="Header-section-user"><h6>Details</h6></div>*@
-            <div class="Header-section-user"><i class="fa-solid fa-universal-access fa-10 orange"></i></div>
+            <div class="Header-section-user-prod">
+                <i class="fa-solid fa-universal-access fa-10 orange"></i>
+                    <span class="orange">Products</span>
+            </div>
             <div class="progress" style="height:2px">
-                <div class="progress-bar bg-success" style="width:@Model.ProgressBarMT%; height:2px"></div>
+                <div class="progress-bar bg-danger" style="width:@Model.ProgressBarMT%; height:2px"></div>
             </div>
             <div class="row text-center justify-content-center">
                 @foreach (var m in Model.Mealtimes)
@@ -119,7 +126,7 @@
                                         </div>
                                 
                                         <form asp-controller="User" asp-action="EditUserProduct">
-                                            <button type="submit" class="btn btn-outline-dark mt-3">Edit</button>
+                                            <button type="submit" class="btn btn-outline-dark mt-3 NameStyle">Edit</button>
                                             <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
                                             <input type="hidden" name="ProductName" value="@p.ProductName" />
                                             <input type="hidden" name="Gramms" value="@p.Gramms" />
@@ -138,20 +145,5 @@
             </div>
         </div>
     </div>
-
-    @*<div class="Result-section-user col-2">
-        <div class="Header-section-user"><h6>Result</h6></div>
-        <hr />
-        <!-- Turquoise -->
-        <label class="text-light">CAT</label>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarC%">@Model.ProgressBarC%</div>
-        </div>
-        <br />
-        <label class="text-light">MT</label>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width:@Model.ProgressBarMT%">@Model.ProgressBarMT%</div>  
-        </div>
-        <br />
-    </div>*@
+</div>
 </div>
