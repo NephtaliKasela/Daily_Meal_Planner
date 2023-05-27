@@ -125,7 +125,7 @@
                                             <div class="Product-block03 col-sm-6 col-md-6 col-lg-6"><p>Calories <strong>@p.Calories</strong></p></div>
                                         </div>
                                 
-                                        <form asp-controller="User" asp-action="EditUserProduct">
+                                        <form asp-controller="User" asp-action="EditUserProduct" method="post">
                                             <button type="submit" class="btn btn-outline-dark mt-3 NameStyle">Edit</button>
                                             <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
                                             <input type="hidden" name="ProductName" value="@p.ProductName" />

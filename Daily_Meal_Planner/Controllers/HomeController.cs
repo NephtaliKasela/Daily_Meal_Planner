@@ -1,9 +1,11 @@
-﻿using BusinessLayer;
-using Daily_Meal_Planner.Models;
-using DataLayer;
+﻿using Daily_Meal_Planner.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
+
+using BusinessLayer;
+using DataLayer;
+using ServiceLayer;
 
 namespace Daily_Meal_Planner.Controllers
 {
@@ -24,15 +26,15 @@ namespace Daily_Meal_Planner.Controllers
             List<Product> products = new List<Product>();
             products = _productRepository.GetAllProducts();
 
+            // Assign the view model
             var vm = new AllProductsViewModel();
             vm.Categories = _productRepository.GetCategoryProducts(products);
 
             // Get all names of category products
-            foreach(var categoryName in vm.Categories)
-            {
-                vm.CategoryList.Add(categoryName.Name);
-            }
+            Prod_Operation operation = new Prod_Operation();
+            vm.CategoryList = operation.GetCategoryName(vm.Categories);
 
+            // Get the category name choosen by the user
             vm.CatName = catName;
 
             return View(vm);

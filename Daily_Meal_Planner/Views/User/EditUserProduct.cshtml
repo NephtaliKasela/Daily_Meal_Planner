@@ -13,7 +13,7 @@
             <h5>@Model.ProductName</h5>
             <hr />
         </div>
-        <form asp-controller="User" asp-action="EditAndSaveUserProduct">
+        <form asp-controller="User" asp-action="EditAndSaveUserProduct" method="post">
             <div>
                 <label>Gramms:</label>
                 <input type="text" name="Gramms" value="@Model.Gramms" class="form-control" />

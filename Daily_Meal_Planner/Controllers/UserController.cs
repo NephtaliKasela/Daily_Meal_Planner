@@ -3,6 +3,7 @@ using Daily_Meal_Planner.Models;
 using DataLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer;
 
 namespace Daily_Meal_Planner.Controllers
 {
@@ -18,14 +19,21 @@ namespace Daily_Meal_Planner.Controllers
         [Authorize]
         public IActionResult Index(string mealtimeChoice, string categoryChoice, string username)
         {
+            // Set a parameter to emplty string if it is null
+            if(mealtimeChoice == null) mealtimeChoice= string.Empty;
+            if(categoryChoice == null) categoryChoice= string.Empty;
+            if(username == null) username= string.Empty;
+
+            // Get user products data from the database by the username
             List<UserProduct> products = _userRepository.GetUserProductsByName(username);
             List<UserCategory> categories = _userRepository.GetCategoryProducts(products);
             List<UserMealtime> mealtimes = _userRepository.GetMealtimes(categories);
 
+            // Assign the view model
             var vm = new UserMealtimeViewModel();
             vm.Mealtimes = mealtimes;
 
-            if ((mealtimeChoice == string.Empty || mealtimeChoice == null) && vm.Mealtimes.Count > 0)
+            if (mealtimeChoice == string.Empty && vm.Mealtimes.Count > 0)
             {
                 vm.MealtimeChoice = vm.Mealtimes[0].MealtimeName;
             }
@@ -34,33 +42,13 @@ namespace Daily_Meal_Planner.Controllers
                 vm.MealtimeChoice = mealtimeChoice;
                 vm.CategoryChoice = categoryChoice;
             }
-            
+
             // Get all mealtime names
-            foreach (UserMealtime m in mealtimes)
-            {
-                vm.MealtimeNames.Add(m.MealtimeName);
-
-                if(m.MealtimeName == mealtimeChoice || m.MealtimeName == vm.MealtimeChoice)
-                {
-                    foreach(UserCategory uc in m.Categories)
-                    {
-                        if (uc.Name == categoryChoice)
-                        {
-                            // get progress bar by category 
-                            foreach (UserProduct up in uc.Products)
-                            {
-                                vm.ProgressBarC += (int)(up.Protein + up.Fats + up.Carbs + up.Calories);
-                            }
-                        }
-
-                        // get progress bar by mealtime
-                        foreach (UserProduct up in uc.Products)
-                        {
-                            vm.ProgressBarMT += (int)(up.Protein + up.Fats + up.Carbs + up.Calories);
-                        }
-                    }
-                }
-            }
+            UserProd_Operation operation = new UserProd_Operation();
+            vm.MealtimeNames = operation.GetMealtimeName(mealtimes);
+            (int progM, int progC) = operation.GetProgressBar(mealtimes, mealtimeChoice, vm.MealtimeChoice, categoryChoice);
+            vm.ProgressBarMT = progM;
+            vm.ProgressBarC = progC;
 
             // Get all category names
             foreach (UserCategory c in categories)
@@ -79,11 +67,14 @@ namespace Daily_Meal_Planner.Controllers
             return View(); 
         }
 
+        // Modify the user product and save
+        [HttpPost]
         public IActionResult EditUserProduct(ProductAndMealtimeViewModel productAndMealtimeViewModel)
         {
             return View(productAndMealtimeViewModel);
         }
 
+        [HttpPost]
         public IActionResult EditAndSaveUserProduct(ProductAndMealtimeViewModel productAndMealtimeViewModel)
         {
             if(!ModelState.IsValid)
@@ -91,9 +82,10 @@ namespace Daily_Meal_Planner.Controllers
                 return RedirectToAction("EditAndSaveUserProduct");
             }
 
+            // Save the user product that was modified
             _userRepository.EditAndSaveUserProduct(productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName); 
 
-            return RedirectToAction("index", "User");
+            return RedirectToAction("index");
         }
     }
 }
