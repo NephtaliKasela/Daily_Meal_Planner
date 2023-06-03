@@ -5,6 +5,17 @@ namespace ServiceLayer
 {
     public class UserProd_Operation
     {
+        public List<string> GetCategoryName(List<UserCategory> categories)
+        {
+            List<string> Names = new List<string>();
+            // Get all names of category products
+            foreach (UserCategory c in categories)
+            {
+                Names.Add(c.Name);
+            }
+            return Names;
+        }
+
         public List<string> GetMealtimeName(List<UserMealtime> mealtimes)
         {
             List<string> Names = new List<string>();

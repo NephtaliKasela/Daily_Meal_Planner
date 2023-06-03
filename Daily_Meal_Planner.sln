@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BisinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{71F675C4-327C-49FB-8F04-3501509CD080}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{7C4845ED-DA83-4C0B-86B0-57B8ABEB369D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Operation", "ServiceLayer\Operation.csproj", "{7C4845ED-DA83-4C0B-86B0-57B8ABEB369D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,42 +4,38 @@
     ViewData["Title"] = "EditUserProduct";
 }
 
-<br />
-<br />
-
-<div class="row justify-content-center container01">
-    <div class="subContainer col-sm-12 col-md-8 col-lg-6">
+<div class="row justify-content-center container01 m-5">
+    <div class="subContainerEdit col-sm-12 col-md-8 col-lg-6">
         <div class="text-center">
-            <h5>@Model.ProductName</h5>
+            <h5 class="NameStyle text-warning">@Model.ProductName</h5>
             <hr />
         </div>
-        <form asp-controller="User" asp-action="EditAndSaveUserProduct" method="post">
+        <form asp-controller="User" asp-action="EditAndSaveUserProduct">
             <div>
                 <label>Gramms:</label>
-                <input type="text" name="Gramms" value="@Model.Gramms" class="form-control" />
+                <input type="number" name="Gramms" value="@Model.Gramms" class="form-control text-warning" />
                 <label>Protein:</label>
-                <input type="text" name="Protein" value="@Model.Protein" class="form-control" />
+                <input type="number" name="Protein" value="@Model.Protein" class="form-control text-warning" />
                 <label>Fats:</label>
-                <input type="text" name="Fats" value="@Model.Fats" class="form-control" />
+                <input type="number" name="Fats" value="@Model.Fats" class="form-control text-warning" />
                 <label>Carbs:</label>
-                <input type="text" name="Carbs" value="@Model.Carbs" class="form-control" />
+                <input type="number" name="Carbs" value="@Model.Carbs" class="form-control text-warning" />
                 <label>Calories:</label>
-                <input type="text" name="Calories" value="@Model.Calories" class="form-control" />
+                <input type="number" name="Calories" value="@Model.Calories" class="form-control text-warning" />
             </div>
 
             <br />
             <div class="row justify-content-center text-center">
                 <div class="btn-submit01 col-6">
-                    <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+                    <button type="submit" class="btn btn-outline-success mt-3">Submit</button>
                     <input type="hidden" name="ProductName" value="@Model.ProductName" />
                     <input type="hidden" name="CatName" value="@Model.CatName" />
                     <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
                 </div>
                 <div class="btn-Delete01 col-6">
-                    <button type="submit" class="btn btn-outline-danger mt-3">Delete</button>
+                    @*<button type="submit" class="btn btn-outline-danger mt-3">Delete</button>*@
                 </div>
             </div>
-            
         </form>
     </div>
 </div>

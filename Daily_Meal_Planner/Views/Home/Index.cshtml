@@ -22,7 +22,7 @@
     <form asp-controller="Home" asp-action="index">
         <div class="Category-block">
             <div>
-                <select name="catName" class="form-control">
+                <select name="catName" class="form-control bg-white text-warning border-1 border-dark">
                     @if ((Model.CatName == string.Empty || @Model.CatName == null) && Model.CategoryList.Count > 0)
                     {
                         Model.CatName = Model.CategoryList[0];
@@ -48,7 +48,7 @@
                 </select>
             </div>
             <div class="justify-content-center">
-                <button type="submit" class="btn btn-outline-primary mt-3">Search</button>
+                <button type="submit" class="btn btn-outline-success mt-3">Search</button>
             </div>
         </div>
     </form>

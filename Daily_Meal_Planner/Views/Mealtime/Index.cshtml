@@ -7,20 +7,17 @@
     ViewData["Title"] = "Index";
 }
 
-<br />
-<br />
-
 <div class="row justify-content-center container01">
-    <div class="subContainer col-sm-4 col-md-4 col-lg-6">
+    <div class="subContainerEdit col-sm-4 col-md-4 col-lg-6 m-5">
         <div class="text-center">
-            <h5>Mealtimes</h5>
+            <h5 class="NameStyle text-warning">Mealtimes</h5>
             <hr />
         </div>
         <br />
         <form asp-controller="Mealtime" asp-action="SaveUserProduct">
             <div>
-                <label>Select mealtime :</label>
-                <select name="MealtimeChoice" class="form-control">
+                <label class="NameStyle">Select mealtime</label>
+                <select name="MealtimeChoice" class="form-control bg-dark text-warning">
                     @foreach(string mealtime in Model.Mealtimes)
                     {
                         <option>@mealtime</option>
@@ -28,7 +25,7 @@
                 </select>
             </div>
             <div class="button01 text-center">
-                <button type="submit" class="btn btn-outline-primary mt-4">Submit</button>
+                <button type="submit" class="btn btn-outline-success mt-4">Submit</button>
                 <input type="hidden" name="ProductName" value="@Model.ProductName" />
                 <input type="hidden" name="Gramms" value="@Model.Gramms" />
                 <input type="hidden" name="Protein" value="@Model.Protein" />

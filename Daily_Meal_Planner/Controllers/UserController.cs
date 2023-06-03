@@ -3,7 +3,7 @@ using Daily_Meal_Planner.Models;
 using DataLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer;
+using Operation;
 
 namespace Daily_Meal_Planner.Controllers
 {
@@ -46,18 +46,21 @@ namespace Daily_Meal_Planner.Controllers
             // Get all mealtime names
             UserProd_Operation operation = new UserProd_Operation();
             vm.MealtimeNames = operation.GetMealtimeName(mealtimes);
+
+            // Get progress bar percentage for the mealtime choosen and the category
             (int progM, int progC) = operation.GetProgressBar(mealtimes, mealtimeChoice, vm.MealtimeChoice, categoryChoice);
             vm.ProgressBarMT = progM;
             vm.ProgressBarC = progC;
 
             // Get all category names
-            foreach (UserCategory c in categories)
-            { 
-                if(!vm.CategoryNames.Contains(c.Name))
-                {
-                    vm.CategoryNames.Add(c.Name);
-                }
-            }
+            vm.CategoryNames = operation.GetCategoryName(categories);
+            //foreach (UserCategory c in categories)
+            //{ 
+            //    if(!vm.CategoryNames.Contains(c.Name))
+            //    {
+            //        vm.CategoryNames.Add(c.Name);
+            //    }
+            //}
             
             return View(vm);
         }
@@ -74,12 +77,11 @@ namespace Daily_Meal_Planner.Controllers
             return View(productAndMealtimeViewModel);
         }
 
-        [HttpPost]
         public IActionResult EditAndSaveUserProduct(ProductAndMealtimeViewModel productAndMealtimeViewModel)
         {
             if(!ModelState.IsValid)
             {
-                return RedirectToAction("EditAndSaveUserProduct");
+                return RedirectToAction("EditAndSaveUserProduct", productAndMealtimeViewModel);
             }
 
             // Save the user product that was modified

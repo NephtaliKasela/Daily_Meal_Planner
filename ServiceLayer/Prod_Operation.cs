@@ -9,7 +9,7 @@ namespace ServiceLayer
         {
             List<string> Names = new List<string>();
             // Get all names of category products
-            foreach (var c in categories)
+            foreach (Category c in categories)
             {
                 Names.Add(c.Name);
             }
