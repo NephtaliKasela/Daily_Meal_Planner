@@ -144,13 +144,16 @@ namespace DataLayer
             _context.SaveChanges();
         }
 
-        public void EditAndSaveUserProduct(string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName)
+        public void EditAndSaveUserProduct(string UserNameOrEmail, string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName)
         {
+            List<UserProduct> user_products = new List<UserProduct>();
+            user_products = _context.UserProducts.Where(p => p.UserName == UserNameOrEmail).ToList();
             UserProduct prod = new UserProduct();
-            foreach(UserProduct up in _context.UserProducts)
+            foreach(UserProduct up in user_products)
             {
                 if(up.Mealtime == mealtimeChoice && up.CategoryName == CategoryName && up.ProductName == productName)
                 {
+                    up.Gramms = Gramms;
                     up.Protein = Protein;
                     up.Fats= Fats;
                     up.Carbs= Carbs;

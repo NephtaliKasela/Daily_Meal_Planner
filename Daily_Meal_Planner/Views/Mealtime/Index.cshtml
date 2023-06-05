@@ -1,7 +1,4 @@
 ﻿@model ProductViewModel
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -32,7 +29,6 @@
                 <input type="hidden" name="Fats" value="@Model.Fats" />
                 <input type="hidden" name="Calories" value="@Model.Calories" />
                 <input type="hidden" name="CatName" value="@Model.CatName" />
-                <input type="hidden" name="UserNameOrEmail" value="@User.Identity?.Name!.ToString()" />
             </div>
             
         </form>

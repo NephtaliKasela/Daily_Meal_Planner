@@ -27,7 +27,8 @@ namespace Operation
             return Names;
         }
 
-        public (int progM, int progC) GetProgressBar(List<UserMealtime> mealtimes, string mealtimeChoice, string mealtimeChoiceByDefault, string categoryChoice)
+        public (int progM, int progC) GetProgressBar(List<UserMealtime> mealtimes, string mealtimeChoice,
+                                                        string mealtimeChoiceByDefault, string categoryChoice)
         {
             int ProgressBarMT = 0;
             int ProgressBarC = 0;

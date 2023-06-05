@@ -21,11 +21,7 @@
     <div class="Category-block">
         <div>
             <select name="mealtimeChoice" class="form-control bg-dark text-warning border-0 border-dark">
-                @if ((Model.MealtimeChoice == string.Empty || @Model.MealtimeChoice == null) && Model.MealtimeNames.Count > 0)
-                {
-                    Model.MealtimeChoice = Model.MealtimeNames[0];
-                }
-                @if (@Model.MealtimeChoice == string.Empty || @Model.MealtimeChoice == null)
+                @if (@Model.MealtimeChoice == string.Empty)
                 {
                     @foreach (string name in Model.MealtimeNames)
                     {
@@ -37,7 +33,7 @@
                     <option>@Model.MealtimeChoice</option>
                     @foreach (string name in Model.MealtimeNames)
                     {
-                        if (name != Model.MealtimeChoice)
+                        @if (name != Model.MealtimeChoice)
                         {
                             <option>@name</option>
                         }

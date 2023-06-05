@@ -40,8 +40,8 @@ namespace Daily_Meal_Planner.Controllers
             else
             {
                 vm.MealtimeChoice = mealtimeChoice;
-                vm.CategoryChoice = categoryChoice;
             }
+            vm.CategoryChoice = categoryChoice;
 
             // Get all mealtime names
             UserProd_Operation operation = new UserProd_Operation();
@@ -54,13 +54,6 @@ namespace Daily_Meal_Planner.Controllers
 
             // Get all category names
             vm.CategoryNames = operation.GetCategoryName(categories);
-            //foreach (UserCategory c in categories)
-            //{ 
-            //    if(!vm.CategoryNames.Contains(c.Name))
-            //    {
-            //        vm.CategoryNames.Add(c.Name);
-            //    }
-            //}
             
             return View(vm);
         }
@@ -81,13 +74,13 @@ namespace Daily_Meal_Planner.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return RedirectToAction("EditAndSaveUserProduct", productAndMealtimeViewModel);
+                return RedirectToAction("EditUserProduct", productAndMealtimeViewModel);
             }
 
             // Save the user product that was modified
-            _userRepository.EditAndSaveUserProduct(productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName); 
+            _userRepository.EditAndSaveUserProduct(productAndMealtimeViewModel.UserNameOrEmail, productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.ProductName, productAndMealtimeViewModel.Gramms, productAndMealtimeViewModel.Protein, productAndMealtimeViewModel.Fats, productAndMealtimeViewModel.Carbs, productAndMealtimeViewModel.Calories, productAndMealtimeViewModel.CatName);
 
-            return RedirectToAction("index");
+            return RedirectToAction("Index", routeValues:(productAndMealtimeViewModel.MealtimeChoice, productAndMealtimeViewModel.CatName, productAndMealtimeViewModel.UserNameOrEmail));
         }
     }
 }

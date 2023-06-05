@@ -1,5 +1,9 @@
 ﻿@model ProductAndMealtimeViewModel
 
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = "EditUserProduct";
 }
@@ -26,14 +30,12 @@
 
             <br />
             <div class="row justify-content-center text-center">
-                <div class="btn-submit01 col-6">
+                <div class="btn-submit01 col-12">
                     <button type="submit" class="btn btn-outline-success mt-3">Submit</button>
                     <input type="hidden" name="ProductName" value="@Model.ProductName" />
                     <input type="hidden" name="CatName" value="@Model.CatName" />
                     <input type="hidden" name="MealtimeChoice" value="@Model.MealtimeChoice" />
-                </div>
-                <div class="btn-Delete01 col-6">
-                    @*<button type="submit" class="btn btn-outline-danger mt-3">Delete</button>*@
+                    <input type="hidden" name="UserNameOrEmail" value="@User.Identity?.Name.ToString()" />
                 </div>
             </div>
         </form>

@@ -17,7 +17,7 @@ namespace DataLayer
         public List<UserCategory> GetCategoryProducts(List<UserProduct> Products);
         public List<UserMealtime> GetMealtimes(List<UserCategory> categories);
         public void SaveUserProduct(List<UserProduct> products, string UserNameOrEmail, string mealtimeChoice, string Name, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName);
-        public void EditAndSaveUserProduct(string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName);
+        public void EditAndSaveUserProduct(string UserNameOrEmail, string mealtimeChoice, string productName, double Gramms, double Protein, double Fats, double Carbs, double Calories, string CategoryName);
 
     }
 }
